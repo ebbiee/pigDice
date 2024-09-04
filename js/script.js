@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM is fully loaded');
     const player1 = document.getElementById("player1");
     const player2 = document.getElementById("player2");    
     const score0 = document.getElementById("player-1-score");
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
     btnRoll.addEventListener("click", function () {
         if (playing) {
             const diceNumber = Math.floor(Math.random() * 6) + 1;
-            console.log(diceNumber)
             diceImg.src = `./img/roll-${diceNumber}.png`;
           if (diceNumber !== 1) {
             currentScore += diceNumber;
