@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const score1 = document.getElementById("player-2-score");
     const player1Current = document.getElementById("player-1-current");
     const player2Current = document.getElementById("player-2-current");
-    const diceImg = document.querySelector(".dice");
+    const cube = document.getElementById("cube");
     const btnRoll = document.querySelector("#roll-dice");
     const btnHold = document.querySelector(".hold");
     
@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
         player2Current.textContent = 0;
         player1.classList.add('active'); 
         player2.classList.remove('active');
+        cube.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        document.querySelector('.winnerdeclaration').textContent = '';
     }
     function switchPlayer(){
         document.getElementById(`player-${activePlayer + 1}-current`).textContent = 0;
@@ -34,17 +36,35 @@ document.addEventListener('DOMContentLoaded', function () {
         player1.classList.toggle("active");
         player2.classList.toggle("active");
     }
+
+    function getDiceRotation(diceNumber) {
+        switch (diceNumber) {
+            case 1:
+                return `rotateX(0deg) rotateY(0deg)`; // Front
+            case 2:
+                return `rotateX(0deg) rotateY(180deg)`; // Back
+            case 3:
+                return `rotateX(0deg) rotateY(-90deg)`; // Left
+            case 4:
+                return `rotateX(0deg) rotateY(90deg)`; // Right
+            case 5:
+                return `rotateX(-90deg) rotateY(0deg)`; // Top
+            case 6:
+                return `rotateX(90deg) rotateY(0deg)`; // Bottom
+        }
+    }
+
     btnRoll.addEventListener("click", function () {
         if (playing) {
             const diceNumber = Math.floor(Math.random() * 6) + 1;
-            diceImg.src = `./img/roll-${diceNumber}.png`;
-          if (diceNumber !== 1) {
-            currentScore += diceNumber;
-            document.getElementById(`player-${activePlayer + 1}-current`).textContent =
-            currentScore;
-          } else {
-            switchPlayer();
-          }
+            cube.style.transform = getDiceRotation(diceNumber);
+            if (diceNumber !== 1) {
+                currentScore += diceNumber;
+                document.getElementById(`player-${activePlayer + 1}-current`).textContent =
+                currentScore;
+            } else {
+                switchPlayer();
+            }
         }
     });
     btnHold.addEventListener("click", function(){
