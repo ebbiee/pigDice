@@ -102,3 +102,32 @@ body {
 background-color: #252424;
 border-radius: 15px;
 }
+.dice div{
+    width: 100px;
+    height: 100px;
+}
+img{
+    height: 100%;
+    width: 100%;
+}
+#cube{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+
+    transform : rotateX(0deg)  rotateY(0deg);
+    transition: transform 0.8s;
+}
+.face {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    backface-visibility: hidden;
+}
+.front { transform: rotateY(0deg) translateZ(65px); }
+.back { transform: rotateY(180deg) translateZ(65px); }
+.right { transform: rotateY(90deg) translateZ(65px); }
+.left { transform: rotateY(-90deg) translateZ(65px); }
+.top { transform: rotateX(90deg) translateZ(65px); }
+.bottom { transform: rotateX(-90deg) translateZ(65px); }
